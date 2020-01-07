@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: configpod
+spec:
+  containers:
+   - name: configmap
+     image: nginx
+     volumeMounts:
+      - name: config-volume
+        mountPath: /etc/config
+  volumes:
+    - name: config-volume
+      configMap:
+        name: first-config 
+        items:
+        - key: file-1.txt 
+          path: file-a
+        - key: file-2.txt
+          path: file-b
